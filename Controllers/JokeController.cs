@@ -24,6 +24,18 @@ namespace JokesWebApp.Controllers
         {
             return View(await _context.Joke.ToListAsync());
         }
+        
+        // GET: Joke/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+        
+        // GET: Joke/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            return View("Index", await _context.Joke.Where( j => j.JokeQuestion.Contains(SearchPhrase)).ToListAsync());
+        }
 
         // GET: Joke/Details/5
         public async Task<IActionResult> Details(int? id)
